@@ -1,4 +1,4 @@
-package object.utilities;
+package objects;
 
 import java.util.ArrayList;
 
@@ -16,61 +16,65 @@ import objects.User;
  *
  */
 public class carMatchOrganizer {
-	private boolean electricViable;
-	private boolean hybridViable;
-	private ArrayList matches;
-	private User user;
-	private ArrayList finalList;
-	
-	public carMatchOrganizer(User user, ArrayList carMatches){
-		matches = carMatches;
-	
-		while(matches.size()!=0){
-			Car bestCar = null;
-			for(Object x : matches){
-				if(x instanceof Car){
-					Car temp = (Car)x;
-					bestCar = bestCar(bestCar, temp, user);
-				}
-			}
-			finalList.add(bestCar);
-			matches.remove(bestCar);
-		}
+
+
+	public void carRanking(User user){
+		
+		
 	}
-	public Car bestCar(Car car1, Car car2, User user){
-		int car1Score = 0;
-		int car2Score = 0;
-		if(car1.getFuelType().equals("electric") && !car2.getFuelType().endsWith("electric")){
-			car1Score++;
+	public Car betterCar(Car car1, Car car2, User user){
+
+		int avgDist = user.getTravelDistance();
+		int scoreCar1 = 0;
+		int scoreCar2 = 0;
+
+		if(avgDist > 40){
+			if(car1.getFuelType().equals("gas")){ scoreCar1 = scoreCar1+10;}
+			if(car1.getFuelType().equals("hybrid")){ scoreCar1 = scoreCar1+5;}
+
+			if(car2.getFuelType().equals("gas")){ scoreCar2 = scoreCar2+10;}
+			if(car2.getFuelType().equals("hybrid")){ scoreCar2 = scoreCar2+10;}
+
+		} else {
+
+			if(car1.getFuelType().equals("electric")){ scoreCar1 = scoreCar1+10;}
+			if(car1.getFuelType().equals("hybrid")){ scoreCar1 = scoreCar1+5;}
+
+			if(car2.getFuelType().equals("electric")){ scoreCar2 = scoreCar2+10;}
+			if(car2.getFuelType().equals("hybrid")){ scoreCar2 = scoreCar2+10;}
+
 		}
-		if(car2.getFuelType().equals("electric") && !car1.getFuelType().equals("electric")){
-			return car2;
+
+		double priceDiff1 = Math.abs(car1.getPrice() - user.getBudget());
+		double priceDiff2 = Math.abs(car2.getPrice() - user.getBudget());
+
+		if(priceDiff1 < 2000){	scoreCar1 = scoreCar1 + 10;	}
+		if(priceDiff1 < 5000){	scoreCar1 = scoreCar1 + 5;	}
+
+		if(priceDiff2 < 2000){	scoreCar2 = scoreCar2 + 10;	}
+		if(priceDiff2 < 5000){	scoreCar2 = scoreCar2 + 5;	}
+
+		if( car1.getPrice() < user.getBudget()){ scoreCar1 = scoreCar1 + 5;	}
+		if( car2.getPrice() < user.getBudget()){ scoreCar2 = scoreCar2 + 5;	}
+
+		if( (car1.getMpgCity()+car1.getMpgHigh())/2 > (car2.getMpgCity()+car2.getMpgHigh())/2 ){
+			scoreCar1 = scoreCar1 + 
+					(int)(car1.getMpgCity()+car1.getMpgHigh())/2 - (int)(car2.getMpgCity()+car2.getMpgHigh())/2;
 		}
-		if(car1.getFuelType().equals("hybrid") && !car2.getFuelType().endsWith("gas")){
-			car1Score++;
+
+		if( (car1.getMpgCity()+car1.getMpgHigh())/2 < (car2.getMpgCity()+car2.getMpgHigh())/2 ){
+			scoreCar2 = scoreCar2 + 
+					(int)(car2.getMpgCity()+car2.getMpgHigh())/2 - (int)(car1.getMpgCity()+car1.getMpgHigh())/2;
 		}
-		if(car2.getFuelType().equals("hybrid") && !car1.getFuelType().equals("gas")){
-			return car2;
-		}
-		if(car1.getMpgCity() > car2.getMpgCity()){
+
+		
+		if (scoreCar1 >= scoreCar2) {
 			return car1;
-		}else if(car2.getMpgCity() > car1.getMpgCity()){
+		} else {
 			return car2;
-		}else{
-			if(car1.getMpgHigh() > car2.getMpgHigh()){
-				return car1;
-			}else if(car2.getMpgHigh() > car1.getMpgHigh()){
-				return car2;
-			}else{
-				
-			}
 		}
-		return null;
-		
-		
-		
-		
+
 	}
-	
+
 
 }
