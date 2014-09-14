@@ -19,10 +19,33 @@ public class carMatchOrganizer {
 
 
 	public void carRanking(User user){
-		
-		
+
+
 	}
-	public Car betterCar(Car car1, Car car2, User user){
+	public static ArrayList finalList(User user, ArrayList carList){
+		ArrayList finalList = new ArrayList();
+		ArrayList currList = (ArrayList)carList.clone();
+		Car bestCar = null;
+		while(currList.size()>0){
+			bestCar = null;
+			for(Object x : currList){
+				if(x instanceof Car){
+					Car temp = (Car)x;
+					if(bestCar == null){
+						bestCar = temp;
+					}else{
+						bestCar = betterCar(bestCar, temp, user);
+					}
+				}
+			}
+			finalList.add(bestCar);
+			currList.remove(bestCar);
+		}
+		return finalList;
+	}
+
+
+	public static Car betterCar(Car car1, Car car2, User user){
 
 		int avgDist = user.getTravelDistance();
 		int scoreCar1 = 0;
@@ -41,7 +64,7 @@ public class carMatchOrganizer {
 			if(car1.getFuelType().equals("hybrid")){ scoreCar1 = scoreCar1+5;}
 
 			if(car2.getFuelType().equals("electric")){ scoreCar2 = scoreCar2+10;}
-			if(car2.getFuelType().equals("hybrid")){ scoreCar2 = scoreCar2+10;}
+			if(car2.getFuelType().equals("hybrid")){ scoreCar2 = scoreCar2+5;}
 
 		}
 
@@ -67,7 +90,7 @@ public class carMatchOrganizer {
 					(int)(car2.getMpgCity()+car2.getMpgHigh())/2 - (int)(car1.getMpgCity()+car1.getMpgHigh())/2;
 		}
 
-		
+
 		if (scoreCar1 >= scoreCar2) {
 			return car1;
 		} else {
