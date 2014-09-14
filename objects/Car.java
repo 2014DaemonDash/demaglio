@@ -2,9 +2,8 @@ package objects;
 
 public class Car extends Item{
 
-	
-	/*
-	private double mpg;
+	private double mpgCity;
+	private double mpgHigh;
 	private int numDoors;
 	private int year;
 	private double price;
@@ -12,91 +11,103 @@ public class Car extends Item{
 	private String make;
 	private String model;
 	private String carType;
-	*/
 
-	/**
-	 * 
-	 * @param super
-	 * @param numDoors
-	 * @param year
-	 * @param price
-	 * @param fuelType
-	 * @param make
-	 * @param model
-	 * @param carType
-	 */
-	public Car(double mpgCity,double mpgHigh, int numDoors, int year, double price, 
+	public Car(double mpgCity, double mpgHigh, int numDoors, int year, double price, 
 			String fuelType, String make, String model, String carType){
-		
-		super.parameters.add(mpgCity);
-		super.parameters.add(mpgHigh);
-		super.parameters.add(numDoors);
-		super.parameters.add(year);
-		super.parameters.add(price);
-		super.parameters.add(fuelType);
-		super.parameters.add(make);
-		super.parameters.add(model);
-		super.parameters.add(carType);
-		
-	}
-
-	public double getMpgCity(){
-		Object obj =  super.parameters.get(0);
-		return (double) obj;
+		this.mpgCity = mpgCity;
+		this.mpgHigh = mpgHigh;
+		this.numDoors = numDoors;
+		this.year = year;
+		this.price = price;
+		this.fuelType = fuelType;
+		this.make = make;
+		this.model = model;
+		this.carType = carType;
 	}
 
 	public double getMpgHigh(){
-		Object obj =  super.parameters.get(1);
-		return (double) obj;
+		return mpgHigh;
 	}
-	
+	public double getMpgCity(){
+		return mpgCity;
+	}
+
 	public int getNumDoors(){
-		Object obj =  super.parameters.get(2);
-		return (int) obj;
+		return numDoors;
 	}
-	
-	
+
 	public int getYear(){
-		Object obj =  super.parameters.get(3);
-		return (int) obj;
+		return year;
 	}
 
 	public double getPrice(){
-		Object obj =  super.parameters.get(4);
-		return (double) obj;
-	}
-	
-	public String getFuelType(){
-		return (String) super.parameters.get(5);
-	}
-	
-	public String getMake(){
-		return (String) super.parameters.get(6);
-	}
-	
-	public String getModel(){
-		return (String) super.parameters.get(7);
-	}
-	
-	public String getCarType(){
-		return (String) super.parameters.get(8);
+		return price;
 	}
 
+	public String getFuelType(){
+		return fuelType;
+	}
+
+	public String getMake(){
+		return make;
+	}
+
+	public String getModel(){
+		return model;
+	}
+
+	public String getCarType(){
+		return carType;
+	}
+
+	public void setMpgHigh(double mpg){
+		this.mpgHigh = mpg;
+	}
+	public void setMpgCity(double mpg){
+		this.mpgCity = mpg;
+	}
+
+	public void setNumDoors(int numDoors){
+		this.numDoors = numDoors;
+	}
+	
+	public void setYear(int year){
+		this.year = year;
+	}
+	
+	public void setPrice(double price){
+		this.price = price;
+	}
+	
+	public void setFuelType(String fuelType){
+		this.fuelType = fuelType;
+	}
+	
+	public void setMake(String make){
+		this.make = make;
+	}
+	
+	public void setModel(String model){
+		this.model = model;
+	}
+	
+	public void setCarType(String carType){
+		this.carType = carType;
+	}
 	
 	public String toString(){
 
 
-		return 	"mpg City= "+getMpgCity()+"\n"+
-				"mpg High= "+getMpgHigh()+"\n"+
-				"number of Doors = "+getNumDoors()+"\n"+
-				"year = "+getYear()+"\n"+
-				"price = " +getPrice() + "\n"+
-				"fuel Type = " +getFuelType() + "\n"+
-				"make = " +getMake() + "\n"+
-				"model = " +getModel() + "\n"+
-				"car type = " +getCarType() + "\n";
+		return 	"mpg City = "+mpgCity+"\n"+
+				"mpg High = "+mpgHigh+"\n"+
+				"number of Doors = "+numDoors+"\n"+
+				"year = "+year+"\n"+
+				"price = " +price + "\n"+
+				"fuel Type = " +fuelType + "\n"+
+				"make = " +make + "\n"+
+				"model = " +model + "\n"+
+				"car type = " +carType + "\n";
 				
-			
 
 	}
 

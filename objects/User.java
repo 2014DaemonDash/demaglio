@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public class User {
 	private int environment; //0 = city 1 = suburban 2 = rural 
-	private int travelDistance;
-	private int timeSpentDriving;
-	private double budget;
+	private int travelDistance; //in miles
+	private int timeSpentDriving; //in minutes
+	private double budget; //in dollars
 	private String username;
 	private Car currentVehicle;
 	private HashMap<Car, Integer> pastPurchases;
